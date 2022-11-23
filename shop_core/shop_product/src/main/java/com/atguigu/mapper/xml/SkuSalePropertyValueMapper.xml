@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mapper.SkuSalePropertyValueMapper">
+
+
+
+    <select id="getSkuSalePropertyValueId" resultType="java.util.Map">
+        SELECT sku_id,
+            group_concat(a.sale_property_value_id ORDER BY b.sale_property_key_id ASC SEPARATOR '|') sale_property_value_id
+            FROM sku_sale_property_value a,product_sale_property_value b
+            WHERE a.product_id =#{productId}
+            AND a.sale_property_value_id = b.id
+            GROUP BY sku_id;
+    </select>
+</mapper>
